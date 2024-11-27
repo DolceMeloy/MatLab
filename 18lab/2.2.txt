@@ -1,0 +1,16 @@
+f = @(x) -cos(x(1)) .* cos(x(2)) .* exp(-((x(1) - pi).^2 + (x(2) - pi).^2));  % Функция Изома
+
+% Начальная точка (ближе к минимальному значению)
+x0 = [3, 3];
+
+% Опции для fminunc (уменьшенная точность и большее количество итераций)
+options = optimoptions('fminunc', 'TolX', 1e-12, 'TolFun', 1e-12, 'MaxIter', 5000, 'Display', 'off', 'Algorithm', 'quasi-newton');
+
+% Минимизация
+[x_min, fval] = fminunc(f, x0, options);
+
+% Вывод только конечных результатов
+disp('Минимум функции (x1, x2):');
+disp(x_min);
+disp('Значение функции в минимуме:');
+disp(fval);
