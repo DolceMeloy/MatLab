@@ -1,0 +1,26 @@
+% Заданные параметры
+a = 0; 
+b = 5; 
+h = 0.5; 
+x = a:h:b;
+
+% Функция
+f_x = -5 .* x.^(3/2) .* exp(-x);
+
+% Построение графика методом plot
+plot(x, f_x, '-k.', 'LineWidth', 1.5); % Чёрная сплошная линия с маркерами "точки"
+
+grid on;
+
+xlabel('x');
+ylabel('f(x)');
+
+title('$$f(x) = -5 \cdot x^{3/2} \cdot e^{-x}$$', 'Interpreter', 'latex');
+
+hold on;
+
+% Построение графика методом fplot
+fplot(@(x) -5 .* x.^(3/2) .* exp(-x), [a b], '--r', 'LineWidth', 1.5); % Красная штрихованная линия
+
+% Легенда снизу снаружи и горизонтально
+legend('Метод plot', 'Метод fplot', 'Location', 'southoutside', 'Orientation', 'horizontal');

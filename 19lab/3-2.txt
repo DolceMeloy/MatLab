@@ -1,0 +1,34 @@
+% Функция Хольдера в одномерной форме
+f_holder = @(x) -abs(sin(x) .* cos(x) .* exp(abs(1 - sqrt(x.^2 + x.^2) / pi)));
+
+% Задание области определения
+x_vals = linspace(-11, 11, 1000); % Точки на интервале [-11, 11]
+f_values = f_holder(x_vals); % Значения функции
+
+% Нахождение экстремумов
+[min_value_holder, min_idx_holder] = min(f_values); % Минимальное значение
+[max_value_holder, max_idx_holder] = max(f_values); % Максимальное значение
+
+x_min_holder = x_vals(min_idx_holder); % Координата минимума
+x_max_holder = x_vals(max_idx_holder); % Координата максимума
+
+% Построение графика
+figure;
+plot(x_vals, f_values, 'LineWidth', 2, 'Color', 'blue'); % График функции
+hold on;
+
+% Отображение точек экстремума
+plot(x_min_holder, min_value_holder, 'bo', 'MarkerSize', 10, 'MarkerFaceColor', 'blue'); % Маркер минимума
+plot(x_max_holder, max_value_holder, 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'red');  % Маркер максимума
+
+% Подписи для экстремальных точек
+text(x_min_holder, min_value_holder, ' Минимум', 'FontSize', 12, 'Color', 'blue');
+text(x_max_holder, max_value_holder, ' Максимум', 'FontSize', 12, 'Color', 'red');
+
+% Оформление графика
+title('График функции Хольдера в одномерной форме с экстремальными точками');
+xlabel('x');
+ylabel('f(x)');
+grid on;
+legend('f(x)', 'Минимум', 'Максимум');
+hold off;

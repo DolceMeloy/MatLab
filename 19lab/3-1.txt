@@ -1,0 +1,33 @@
+% Поиск точек экстремума для функции Хольдера
+
+[min_value, min_idx] = min(f(:)); % Минимальное значение функции
+[max_value, max_idx] = max(f(:)); % Максимальное значение функции
+
+[row_min, col_min] = ind2sub(size(f), min_idx); % Индексы минимального значения
+[row_max, col_max] = ind2sub(size(f), max_idx); % Индексы максимального значения
+
+x_min = x1(row_min, col_min); % Координаты x1 для минимума
+x2_min = x2(row_min, col_min); % Координаты x2 для минимума
+
+x_max = x1(row_max, col_max); % Координаты x1 для максимума
+x2_max = x2(row_max, col_max); % Координаты x2 для максимума
+
+% Построение графика с экстремумами
+figure;
+surf(x1, x2, f);
+shading interp; % Плавная заливка
+colormap(jet); % Цветовая палитра
+colorbar; % Цветовая шкала
+
+% Визуализация точек экстремума
+hold on;
+text(x_min, x2_min, min_value, 'Минимум', 'FontSize', 12, 'Color', 'blue', 'FontWeight', 'bold');
+text(x_max, x2_max, max_value, 'Максимум', 'FontSize', 12, 'Color', 'red', 'FontWeight', 'bold');
+plot3(x_min, x2_min, min_value, 'bo', 'MarkerSize', 10, 'MarkerFaceColor', 'blue'); % Маркер для минимума
+plot3(x_max, x2_max, max_value, 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'red'); % Маркер для максимума
+
+title('Функция Хольдера с экстремальными точками');
+xlabel('x_1');
+ylabel('x_2');
+zlabel('f(x_1, x_2)');
+hold off;
