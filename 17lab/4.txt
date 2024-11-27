@@ -1,0 +1,27 @@
+cost = [7 6 6 4;  
+        1 4 4 7;  
+        5 7 2 8;  
+        3 7 8 6]; 
+
+f = cost(:);
+
+Aeq_worker = kron(eye(4), ones(1, 4));
+
+Aeq_task = kron(ones(1, 4), eye(4));
+
+Aeq = [Aeq_worker; Aeq_task];
+beq = ones(8, 1);
+
+lb = zeros(16, 1);
+ub = ones(16, 1);
+
+intcon = 1:16;
+
+[x, fval] = intlinprog(f, intcon, [], [], Aeq, beq, lb, ub);
+
+x_matrix = reshape(x, [4, 4]);
+
+disp('Матрица назначений (1 — назначено, 0 — не назначено):');
+disp(x_matrix);
+disp('Минимальные затраты:');
+disp(fval);
